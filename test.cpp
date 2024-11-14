@@ -1,9 +1,17 @@
-#include <cstddef>
+typedef struct _FILE {
 
-int main() {
-    // Memory leak
-    int* q = new int;
-    // Null pointer dereference
-    int* v = NULL;
-    return *v;
+} FILE;
+
+void test() {
+    FILE* f = 0;
+    int *p = (int*)malloc(10);
+    *p = 0;                        // Leak the pointer.
+
+    f = fopen("file.txt", "w");    // Leak the file.
 }
+
+int main(){
+        test();
+        return 0;
+}
+
